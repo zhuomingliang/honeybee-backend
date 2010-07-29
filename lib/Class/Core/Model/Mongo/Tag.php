@@ -1,5 +1,5 @@
 <?php
-require_once ROOT_DIR . 'lib/Class/Base/MongoCollectioni.php';
+require_once ROOT_DIR . 'lib/Class/Core/Model/Mongo/MongoCollectioni.php';
 
 Class Tag extends MongoCollectioni {
     protected $_CollectionName = __CLASS__;
