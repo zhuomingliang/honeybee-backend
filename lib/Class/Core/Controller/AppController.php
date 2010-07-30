@@ -15,7 +15,7 @@ Class AppController {
     }
 
     public function run() {
-        include_once ROOT_DIR . 'App/Controller/' . self::$_class . '.php';
+        include_once APP_DIR . 'App/Controller/' . self::$_class . '.php';
 
         if (class_exists(self::$_class, false)){
             new self::$_class();
