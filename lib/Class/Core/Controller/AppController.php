@@ -1,13 +1,13 @@
 <?php
-Class AppController {
-    protected $_PATH_INFO = '';
-    private static $_class = '';
+require_once 'Controller.php';
+
+Class AppController extends Controller {
+    private static $_class;
+
     public function __construct() {
         self::$_class = isset($_GET['_CLASS_NAME']) ? ucfirst($_GET['_CLASS_NAME']) : 'index';
-        $this->_PATH_INFO = isset($_GET['_PATH_INFO']) ? $_GET['_PATH_INFO'] : '';
 
         unset($_GET['_CLASS_NAME']);
-        unset($_GET['_PATH_INFO']);
     }
 
     public static function CreateApp() {
@@ -21,7 +21,7 @@ Class AppController {
         }
 
         if (class_exists(self::$_class, false)){
-            new self::$_class();
+            $class = new self::$_class();
         }
     }
 }
