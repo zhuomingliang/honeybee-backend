@@ -2,17 +2,19 @@
 require_once 'MongoDBi.php';
 
 abstract class MongoCollectioni {
+    protected $_DbName = '_default';
+
     private static $_Collections = array();
     
     public function __construct() {
-        if (isset(self::$_Collections[$this->_CollectionName])) {
+        if (isset(self::$_Collections["{$this->_DbName}_{$this->_CollectionName}"])) {
             return;
         }
 
-        self::$_Collections[$this->_CollectionName] = MongoDBi::connectDB()->selectCollection($this->_CollectionName);
+        self::$_Collections["{$this->_DbName}_{$this->_CollectionName}"] = MongoDBi::connectDB($this->_DbName)->selectCollection($this->_CollectionName);
     }
 
-    public static function MapReduce($collection, $map, $reduce, $options = NULL ) {
+    public function MapReduce($collection, $map, $reduce, $options = NULL ) {
 
     }
     

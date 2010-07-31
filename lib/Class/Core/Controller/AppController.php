@@ -16,10 +16,13 @@ Class AppController extends Controller {
 
     public function run() {
         $class_file = APP_DIR . 'App/Controller/' . self::$_class . '.php';
-        if (is_file($class_file)) {
-            include_once $class_file;
+        if (!is_file($class_file)) {
+            header('HTTP/1.1 404 Not Found');
+            //header("status: 404 Not Found");
+            exit;
         }
-
+        
+        include_once $class_file;
         if (class_exists(self::$_class, false)){
             $class = new self::$_class();
         }
