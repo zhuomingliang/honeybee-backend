@@ -9,7 +9,7 @@ class MongoDBi {
             return self::$_MongoDBConnections[$db];
         }
         
-        if ($db = '_default') {
+        if ($db === '_default') {
             $config = Config::get('MongoDB');
             if (!isset($config['db'])) {
                 throw new Exception('There is no DB config in ini file, do you miss it?');
