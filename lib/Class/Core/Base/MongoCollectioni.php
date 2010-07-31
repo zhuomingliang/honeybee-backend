@@ -3,11 +3,11 @@ require_once 'MongoDBi.php';
 
 abstract class MongoCollectioni {
     protected $_DbName = '_default';
-    
+
     protected $_CollectionName;
 
     private static $_Collections = array();
-    
+
     public function __construct() {
         if (isset(self::$_Collections["{$this->_DbName}_{$this->_CollectionName}"])) {
             return;
@@ -21,7 +21,7 @@ abstract class MongoCollectioni {
     }
     
     public function __call( $method, $arguments ){
-         return call_user_func_array(array(&self::$_Collections[$this->_CollectionName], $method), $arguments);
+         return call_user_func_array(array(&self::$_Collections["{$this->_DbName}_{$this->_CollectionName}"], $method), $arguments);
     }
 }
 ?>
