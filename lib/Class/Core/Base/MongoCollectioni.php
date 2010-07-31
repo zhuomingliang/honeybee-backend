@@ -3,6 +3,8 @@ require_once 'MongoDBi.php';
 
 abstract class MongoCollectioni {
     protected $_DbName = '_default';
+    
+    protected $_CollectionName;
 
     private static $_Collections = array();
     
@@ -14,7 +16,7 @@ abstract class MongoCollectioni {
         self::$_Collections["{$this->_DbName}_{$this->_CollectionName}"] = MongoDBi::connectDB($this->_DbName)->selectCollection($this->_CollectionName);
     }
 
-    public function MapReduce($collection, $map, $reduce, $options = NULL ) {
+    public function MapReduce($collection, $map, $reduce, $options = null ) {
 
     }
     
