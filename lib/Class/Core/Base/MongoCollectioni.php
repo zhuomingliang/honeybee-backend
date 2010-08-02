@@ -16,10 +16,10 @@ abstract class MongoCollectioni {
         self::$_Collections["{$this->_DbName}_{$this->_CollectionName}"] = MongoDBi::connectDB($this->_DbName)->selectCollection($this->_CollectionName);
     }
 
-    public function MapReduce($collection, $map, $reduce, $options = null ) {
+    public function MapReduce( $collection, $map, $reduce, $options = null ) {
 
     }
-    
+
     public function __call( $method, $arguments ){
          return call_user_func_array(array(&self::$_Collections["{$this->_DbName}_{$this->_CollectionName}"], $method), $arguments);
     }

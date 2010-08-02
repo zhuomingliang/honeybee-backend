@@ -5,7 +5,7 @@ class Config {
 
 
     private static function _construct( $config_name = 'default' ) {
-        if (self::$_config !== null ) {
+        if (self::$_config !== null) {
             return;
         }
 
