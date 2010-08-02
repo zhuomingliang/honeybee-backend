@@ -1,17 +1,15 @@
 <?php
 class Log {
     public static function save($e) {
-        
         header('HTTP/1.1 500 Internal Server Error');
 
         if (is_object($e)) {
-            echo $e->getCode(), "\n";
-            echo $e->getMessage(), "\n";
-            echo $e->getFile(), "\n";
-            echo $e->getLine(), "\n";
-            echo $e->getTraceAsString(), "\n";
+            echo 'Exception Code: ',$e->getCode(), '<br />';
+            echo 'Exception Message: ', $e->getMessage(), '<br />';
+            echo 'At File ', $e->getFile(), ', Line ', $e->getLine(), '<br />';
+            echo 'Trace:<br />', $e->getTraceAsString(), '<br />';
         } else {
-            echo $e, "\n";
+            echo $e, '<br />';
         }
 
     }
