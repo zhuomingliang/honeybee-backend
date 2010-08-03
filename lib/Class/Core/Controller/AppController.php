@@ -21,11 +21,13 @@ Class AppController extends Controller {
             //header('status: 404 Not Found');
             exit;
         }
-        
+
         include_once $class_file;
-        if (class_exists(self::$_class, false)){
-            $class = new self::$_class();
+        if (!class_exists(self::$_class, false)){
+            throw new Exception('Couldn\'t find \'' . self::$_class . '\' class, are you writting wrong class name?');
         }
+
+        $class = new self::$_class();
     }
 }
 ?>
