@@ -7,5 +7,17 @@ abstract Class Controller {
 
         unset($_GET['_PATH_INFO']);
     }
+
+    public function setFlash( $name, $value ) {
+        $_SESSION['_FLASH']["$name"] = $value;
+    }
+
+    public function getFlash( $name ) {
+        if (isset($_SESSION['_FLASH']["$name"])) {
+            return $_SESSION['_FLASH']["$name"];
+        }
+
+        return '';
+    }
 }
 ?>

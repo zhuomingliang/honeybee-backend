@@ -30,5 +30,4 @@ Class PDOi {
         return $pdo_connection = new PDO($dsn, $username, $password, $driver_options);
     }
 }
-
 ?>
