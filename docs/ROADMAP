@@ -1,5 +1,5 @@
 Solr Search Engine Compoment support
-PDO completion
+PDOi completion
 add setFlash/getFlash to Controller
 default.ini merge
 multi sub-domain support
