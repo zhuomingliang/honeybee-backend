@@ -4,7 +4,7 @@ require_once 'Config.php';
 
 class Mongoi {
 
-    public static function getConnection( $options = array('connect' => TRUE) ) {
+    public static function getConnection( $options = array('connect' => true) ) {
         static $mongo_connection = null;
 
         if ($mongo_connection !== null) {
