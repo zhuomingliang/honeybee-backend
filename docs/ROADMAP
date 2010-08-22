@@ -1,0 +1,6 @@
+Solr Search Engine Compoment support
+PDO completion
+add setFlash/getFlash to Controller
+default.ini merge
+multi sub-domain support
+Form Validation(include HTML purifier)
