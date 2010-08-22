@@ -14,9 +14,7 @@ class Mongoi {
         $config = Config::get('MongoDB');
         $server = isset($config['server']) ? $config['server'] : 'mongodb://localhost';
 
-        $mongo_connection = new Mongo($server, $options);
-
-        return $mongo_connection;
+        return $mongo_connection = new Mongo($server, $options);
     }
 }
 ?>

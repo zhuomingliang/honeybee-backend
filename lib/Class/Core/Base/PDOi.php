@@ -27,9 +27,7 @@ Class PDOi {
             $driver_options[PDO::MYSQL_ATTR_INIT_COMMAND] = "SET NAMES '{$charset}'";
         }
 
-        $pdo_connection = new PDO($dsn, $username, $password, $driver_options);
-
-        return $pdo_connection;
+        return $pdo_connection = new PDO($dsn, $username, $password, $driver_options);
     }
 }
 
