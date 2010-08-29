@@ -14,7 +14,11 @@ abstract Class Controller {
 
     public function getFlash( $name ) {
         if (isset($_SESSION['_FLASH']["$name"])) {
-            return $_SESSION['_FLASH']["$name"];
+            $name = $_SESSION['_FLASH']["$name"];
+
+            unset($_SESSION['_FLASH']["$name"]);
+
+            return $name;
         }
 
         return '';
