@@ -5,7 +5,7 @@ Class AppController extends Controller {
     private static $_class;
 
     public function __construct() {
-        self::$_class = isset($_GET['_CLASS_NAME']) ? ucfirst($_GET['_CLASS_NAME']) : 'Index';
+        self::$_class = isset($_GET['_CLASS_NAME']) ? $_GET['_CLASS_NAME'] : 'index';
 
         unset($_GET['_CLASS_NAME']);
     }
@@ -18,8 +18,7 @@ Class AppController extends Controller {
         $class_file = APP_DIR . 'App/Controller/' . self::$_class . '.php';
         if (!is_file($class_file)) {
             header('HTTP/1.1 404 Not Found');
-            //header('status: 404 Not Found');
-            exit;
+            throw new Exception('Couldn\'t find \'' . self::$_class . '.php\' , are you visiting wrong file?');
         }
 
         include_once $class_file;

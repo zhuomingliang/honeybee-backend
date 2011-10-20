@@ -194,7 +194,6 @@ abstract class DatabaseConnection extends PDO {
 
   /**
    * The key representing this connection.
-   * 
    * The key is a unique string which identifies a database connection. A
    * connection can be a single server or a cluster of master and slaves (use
    * target to pick between master and slave).
@@ -1662,7 +1661,7 @@ abstract class Database {
     // We cannot rely on the registry yet, because the registry requires an
     // open database connection.
     $driver_class = 'DatabaseConnection_' . $driver;
-    require_once DRUPAL_ROOT . '/includes/database/' . $driver . '/database.inc';
+    require_once dirname(__FILE__) . '/' . $driver . '/database.inc';
     $new_connection = new $driver_class(self::$databaseInfo[$key][$target]);
     $new_connection->setTarget($target);
     $new_connection->setKey($key);

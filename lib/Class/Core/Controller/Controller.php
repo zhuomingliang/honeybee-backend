@@ -8,15 +8,15 @@ abstract Class Controller {
         unset($_GET['_PATH_INFO']);
     }
 
-    public function setFlash( $name, $value ) {
-        $_SESSION['_FLASH']["$name"] = $value;
+    public function setMessage( $name, $value ) {
+        $_SESSION['_MESSAGE']["$name"] = $value;
     }
 
-    public function getFlash( $name ) {
-        if (isset($_SESSION['_FLASH']["$name"])) {
-            $name = $_SESSION['_FLASH']["$name"];
+    public function getMessage( $name ) {
+        if (isset($_SESSION['_MESSAGE']["$name"])) {
+            $name = $_SESSION['_MESSAGE']["$name"];
 
-            unset($_SESSION['_FLASH']["$name"]);
+            unset($_SESSION['_MESSAGE']["$name"]);
 
             return $name;
         }
