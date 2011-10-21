@@ -24,33 +24,32 @@ abstract Class Controller {
     }
 
     public function route($class) {
-        $matched = false;
+        if($this->_PATH_INFO) {
+            foreach ($this->_routes as $_route => $_class) {
+                if(!preg_match($_route, $this->_PATH_INFO)) continue;
 
-        foreach ($this->_routes as $_route => $_class) {
-            if(!preg_match($_route, $this->_PATH_INFO)) continue;
+                $class_file = APP_DIR . 'App/Action/' . $class . '/' . $_class . '.php';
 
-            $matched    = true;
-            $class_file = APP_DIR . 'App/Action/' . $class . '/' . $_class . '.php';
+                self::_route($_class . 'Action', $class_file);
 
-            self::_route($_class . 'Action', $class_file);
+                return;
+            }
         }
 
-        if (!$matched) {
-            $class_file = APP_DIR . 'App/Action/' . $class . '.php';
+        $class_file = APP_DIR . 'App/Action/' . $class . '.php';
 
-            self::_route($class . 'Action', $class_file);
-        }
+        self::_route($class . 'Action', $class_file);
     }
 
     public function setMessage( $name, $value ) {
-        $_SESSION['_MESSAGE']["$name"] = $value;
+        $_SESSION['_MESSAGE_']["$name"] = $value;
     }
 
     public function getMessage( $name ) {
-        if (isset($_SESSION['_MESSAGE']["$name"])) {
-            $name = $_SESSION['_MESSAGE']["$name"];
+        if (isset($_SESSION['_MESSAGE_']["$name"])) {
+            $name = $_SESSION['_MESSAGE_']["$name"];
 
-            unset($_SESSION['_MESSAGE']["$name"]);
+            unset($_SESSION['_MESSAGE_']["$name"]);
 
             return $name;
         }
