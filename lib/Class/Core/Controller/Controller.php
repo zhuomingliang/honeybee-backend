@@ -1,7 +1,7 @@
 <?php
 abstract Class Controller {
     protected $_PATH_INFO;
-    protected $_routes;
+    protected $_routes = array();
 
     public function __construct() {
         $this->_PATH_INFO = isset($_GET['_PATH_INFO']) ? $_GET['_PATH_INFO'] : '';
