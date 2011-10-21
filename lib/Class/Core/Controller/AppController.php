@@ -22,11 +22,13 @@ Class AppController extends Controller {
         }
 
         include_once $class_file;
-        if (!class_exists(self::$_class, false)){
-            throw new Exception('Couldn\'t find \'' . self::$_class . '\' class, are you writting wrong class name?');
+        $class_name = self::$_class . 'Controller';
+        if (!class_exists($class_name, false)){
+            throw new Exception('Couldn\'t find \'' . $class_name . '\' class, are you writting wrong class name?');
         }
 
-        $class = new self::$_class();
+        $class = new $class_name();
+        $class->route();
     }
 }
 ?>
