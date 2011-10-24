@@ -21,6 +21,7 @@ abstract Class Controller {
         }
 
         $class = new $class($this->_PATH_INFO);
+        $class->show();
     }
 
     public function route($class) {
