@@ -1,6 +1,4 @@
 <?php
-require_once 'Controller.php';
-
 Class AppController extends Controller {
     private static $_class;
 
@@ -21,7 +19,7 @@ Class AppController extends Controller {
             throw new Exception('Couldn\'t find \'' . self::$_class . '.php\' , are you visiting wrong file?');
         }
 
-        include_once $class_file;
+        include $class_file;
         $class_name = self::$_class . 'Controller';
         if (!class_exists($class_name, false)){
             throw new Exception('Couldn\'t find \'' . $class_name . '\' class, are you writting wrong class name?');

@@ -15,7 +15,7 @@ abstract Class Controller {
             throw new Exception('Couldn\'t find \'' . $class . '.php\' , are you visiting wrong file?');
         }
 
-        include_once $class_file;
+        include $class_file;
         if (!class_exists($class, false)){
             throw new Exception('Couldn\'t find \'' . $class . '\' class, are you writting wrong class name?');
         }
