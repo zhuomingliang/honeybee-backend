@@ -1,6 +1,6 @@
 <?php
 
-class Action {
+abstract class Action {
     protected $data = array();
 
     function include_template($file_name) {
