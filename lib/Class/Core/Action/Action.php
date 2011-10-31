@@ -3,7 +3,7 @@ require HONEYBEE_DIR . 'lib/Class/Core/Base/Registry.php';
 
 abstract class Action {
     protected $data = array();
-    protected $form = array();
+    protected $form;
     protected $get;
     protected $cookie;
 
@@ -13,11 +13,11 @@ abstract class Action {
         $this->form = new Registry();
 
         foreach ($_GET as $key => $value) {
-            $this->get->$key = $value;
+            $this->get->$key = trim($value);
         }
 
         foreach ($_POST as $key =>$value) {
-            $this->form->$key = trim($value);
+            $this->form->$key = check_plain($value);
         }
 
         foreach ($_COOKIE as $key => $value) {
@@ -42,6 +42,22 @@ abstract class Action {
 
     public function show() {
 
+    }
+
+    public function setMessage( $name, $value ) {
+        $_SESSION['_MESSAGE_']["$name"] = $value;
+    }
+
+    public function getMessage( $name ) {
+        if (isset($_SESSION['_MESSAGE_']["$name"])) {
+            $name = $_SESSION['_MESSAGE_']["$name"];
+
+            unset($_SESSION['_MESSAGE_']["$name"]);
+
+            return $name;
+        }
+
+        return '';
     }
 }
 

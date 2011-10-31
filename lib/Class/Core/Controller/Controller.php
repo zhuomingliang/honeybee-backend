@@ -24,7 +24,7 @@ abstract Class Controller {
         $class->show();
     }
 
-    public function route($class) {
+    public function route($class = 'Index') {
         if($this->_PATH_INFO) {
             foreach ($this->_routes as $_route => $_class) {
                 if(!preg_match($_route, $this->_PATH_INFO)) continue;
@@ -40,22 +40,6 @@ abstract Class Controller {
         $class_file = APP_DIR . 'App/Action/' . $class . '.php';
 
         self::_route($class . 'Action', $class_file);
-    }
-
-    public function setMessage( $name, $value ) {
-        $_SESSION['_MESSAGE_']["$name"] = $value;
-    }
-
-    public function getMessage( $name ) {
-        if (isset($_SESSION['_MESSAGE_']["$name"])) {
-            $name = $_SESSION['_MESSAGE_']["$name"];
-
-            unset($_SESSION['_MESSAGE_']["$name"]);
-
-            return $name;
-        }
-
-        return '';
     }
 }
 ?>
