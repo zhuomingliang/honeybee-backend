@@ -12,7 +12,7 @@
   SyntaxHighlighter.all();
 </script>
 </head>
-<body >
+<body>
 <?php
 
 echo 'Current PHP version: ' . phpversion() . "<br />";
@@ -136,7 +136,7 @@ if ( $_POST['submit'] == "Submit" ) {
     }
   }
   ?>
-  <form method="POST" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data">
   <?php $value = ( $_POST['From_Name'] != '' ) ? $_POST['From_Name'] : ''; ?>
   <input type="hidden" name="From_Name" value="<?php echo $value; ?>">
   <?php $value = ( $_POST['From_Email'] != '' ) ? $_POST['From_Email'] : ''; ?>
@@ -304,7 +304,7 @@ if ( count($errorMsg) > 0 ) {
     width: 70%;
   }
   </style>
-  <form method="POST" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data">
   <table border="1" width="900" cellspacing="0" cellpadding="5" style="border-collapse: collapse" bgcolor="#C0C0C0">
     <tr>
       <td valign="top";><strong>Message</strong><br /><br />
@@ -425,3 +425,4 @@ if ( count($errorMsg) > 0 ) {
 }
 
 ?>
+</body></html>
