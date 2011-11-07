@@ -3,31 +3,26 @@ require HONEYBEE_DIR . 'lib/Class/Core/Base/Registry.php';
 
 abstract class Action {
     protected $data = array();
-    protected $form;
+    protected $post;
     protected $get;
     protected $cookie;
 
     public function __construct() {
         $this->get = new Registry();
         $this->cookie = new Registry();
-        $this->form = new Registry();
+        $this->post = new Registry();
 
         foreach ($_GET as $key => $value) {
             $this->get->$key = trim($value);
         }
 
         foreach ($_POST as $key =>$value) {
-            $this->form->$key = check_plain($value);
+            $this->post->$key = check_plain($value);
         }
 
         foreach ($_COOKIE as $key => $value) {
             $this->cookie->$key = $value;
         }
-    }
-
-    public function __get($key) {
-        if(isset(self::$_REQUEST[$key])) return self::$_REQUEST[$key];
-        return null;
     }
 
     public function include_template($file_name) {
