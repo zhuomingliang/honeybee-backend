@@ -77,7 +77,7 @@ interface QueryConditionInterface {
 
   /**
    * Sets a condition that the specified subquery returns values.
-   * 
+   *
    * @param SelectQueryInterface $select
    *   The subquery that must contain results.
    *
@@ -85,10 +85,10 @@ interface QueryConditionInterface {
    *   The called object.
    */
   public function exists(SelectQueryInterface $select);
-  
+
   /**
    * Sets a condition that the specified subquery returns no values.
-   * 
+   *
    * @param SelectQueryInterface $select
    *   The subquery that must not contain results.
    *
@@ -96,7 +96,7 @@ interface QueryConditionInterface {
    *   The called object.
    */
   public function notExists(SelectQueryInterface $select);
-  
+
   /**
    * Gets a complete list of all conditions in this conditional clause.
    *
@@ -277,14 +277,14 @@ abstract class Query implements QueryPlaceholderInterface {
 
   /**
    * The target of the connection object.
-   * 
+   *
    * @var string
    */
   protected $connectionTarget;
 
   /**
    * The key of the connection object.
-   * 
+   *
    * @var string
    */
   protected $connectionKey;
@@ -798,7 +798,7 @@ class DeleteQuery extends Query implements QueryConditionInterface {
     $this->condition->notExists($select);
     return $this;
   }
-  
+
   /**
    * Implements QueryConditionInterface::conditions().
    */
@@ -1047,7 +1047,7 @@ class UpdateQuery extends Query implements QueryConditionInterface {
     $this->condition->notExists($select);
     return $this;
   }
-  
+
   /**
    * Implements QueryConditionInterface::conditions().
    */
@@ -1539,7 +1539,7 @@ class MergeQuery extends Query implements QueryConditionInterface {
     $this->condition->notExists($select);
     return $this;
   }
-  
+
   /**
    * Implements QueryConditionInterface::conditions().
    */
@@ -1756,14 +1756,14 @@ class DatabaseCondition implements QueryConditionInterface, Countable {
   public function exists(SelectQueryInterface $select) {
     return $this->condition('', $select, 'EXISTS');
   }
-  
+
   /**
    * Implements QueryConditionInterface::notExists().
    */
   public function notExists(SelectQueryInterface $select) {
     return $this->condition('', $select, 'NOT EXISTS');
   }
-  
+
   /**
    * Implements QueryConditionInterface::conditions().
    */
