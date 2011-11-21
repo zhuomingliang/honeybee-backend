@@ -1,7 +1,6 @@
 <?php
 
 class Autoloader {
-
     public static function init() {
         static $loader = null;
         if ($loader == null)

@@ -17,7 +17,7 @@ abstract class Action {
         }
 
         foreach ($_POST as $key =>$value) {
-            $this->post->$key = check_plain($value);
+            $this->post->$key = is_array($value) ? $value : check_plain($value);
         }
 
         foreach ($_COOKIE as $key => $value) {
@@ -45,11 +45,13 @@ abstract class Action {
 
     public function getMessage( $name ) {
         if (isset($_SESSION['_MESSAGE_']["$name"])) {
-            $name = $_SESSION['_MESSAGE_']["$name"];
+            $result = $_SESSION['_MESSAGE_']["$name"];
+
+            $_SESSION['_MESSAGE_']["$name"] = null;
 
             unset($_SESSION['_MESSAGE_']["$name"]);
 
-            return $name;
+            return $result;
         }
 
         return '';
