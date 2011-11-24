@@ -16,7 +16,7 @@ Class AppController extends Controller {
         $class_file = APP_DIR . 'App/Controller/' . self::$_class . '.php';
         if (!is_file($class_file)) {
             header('HTTP/1.1 404 Not Found');
-            throw new Exception('Couldn\'t find \'' . self::$_class . '.php\' , are you visiting wrong file?');
+            throw new Exception('Couldn\'t find \'' . $class_file . '\' , are you visiting wrong file?');
         }
 
         include $class_file;

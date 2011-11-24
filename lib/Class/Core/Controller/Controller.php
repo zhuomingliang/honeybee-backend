@@ -12,7 +12,7 @@ abstract Class Controller {
     private function _route($class, $class_file) {
         if (!is_file($class_file)) {
             header('HTTP/1.1 404 Not Found');
-            throw new Exception('Couldn\'t find \'' . $class . '.php\' , are you visiting wrong file?');
+            throw new Exception('Couldn\'t find \'' . $class_file . '\' , are you visiting wrong file?');
         }
 
         include $class_file;
