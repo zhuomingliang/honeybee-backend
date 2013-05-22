@@ -31,7 +31,7 @@ abstract Class Controller {
 
                 $class_file = APP_DIR . 'App/Action/' . $class . '/' . $_class . '.php';
 
-                self::_route($_class . 'Action', $class_file);
+                $this->_route($_class . 'Action', $class_file);
 
                 return;
             }
@@ -39,7 +39,7 @@ abstract Class Controller {
 
         $class_file = APP_DIR . 'App/Action/' . $class . '.php';
 
-        self::_route($class . 'Action', $class_file);
+        $this->_route($class . 'Action', $class_file);
     }
 }
 ?>
