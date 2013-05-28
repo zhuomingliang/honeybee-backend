@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @ingroup database
+ * @addtogroup database
  * @{
  */
 
@@ -22,6 +22,9 @@ interface QueryConditionInterface {
    * parameters, they are taken as $field and $value with $operator having a
    * value of IN if $value is an array and = otherwise.
    *
+   * Do not use this method to test for NULL values. Instead, use
+   * QueryConditionInterface::isNull() or QueryConditionInterface::isNotNull().
+   *
    * @param $field
    *   The name of the field to check. If you would like to add a more complex
    *   condition involving operators or functions, use where().
@@ -36,6 +39,9 @@ interface QueryConditionInterface {
    *
    * @return QueryConditionInterface
    *   The called object.
+   *
+   * @see QueryConditionInterface::isNull()
+   * @see QueryConditionInterface::isNotNull()
    */
   public function condition($field, $value = NULL, $operator = NULL);
 
@@ -77,7 +83,7 @@ interface QueryConditionInterface {
 
   /**
    * Sets a condition that the specified subquery returns values.
-   *
+   * 
    * @param SelectQueryInterface $select
    *   The subquery that must contain results.
    *
@@ -85,10 +91,10 @@ interface QueryConditionInterface {
    *   The called object.
    */
   public function exists(SelectQueryInterface $select);
-
+  
   /**
    * Sets a condition that the specified subquery returns no values.
-   *
+   * 
    * @param SelectQueryInterface $select
    *   The subquery that must not contain results.
    *
@@ -96,7 +102,7 @@ interface QueryConditionInterface {
    *   The called object.
    */
   public function notExists(SelectQueryInterface $select);
-
+  
   /**
    * Gets a complete list of all conditions in this conditional clause.
    *
@@ -277,14 +283,14 @@ abstract class Query implements QueryPlaceholderInterface {
 
   /**
    * The target of the connection object.
-   *
+   * 
    * @var string
    */
   protected $connectionTarget;
 
   /**
    * The key of the connection object.
-   *
+   * 
    * @var string
    */
   protected $connectionKey;
@@ -798,7 +804,7 @@ class DeleteQuery extends Query implements QueryConditionInterface {
     $this->condition->notExists($select);
     return $this;
   }
-
+  
   /**
    * Implements QueryConditionInterface::conditions().
    */
@@ -839,7 +845,7 @@ class DeleteQuery extends Query implements QueryConditionInterface {
    * Executes the DELETE query.
    *
    * @return
-   *   The return value is dependant on the database connection.
+   *   The return value is dependent on the database connection.
    */
   public function execute() {
     $values = array();
@@ -1047,7 +1053,7 @@ class UpdateQuery extends Query implements QueryConditionInterface {
     $this->condition->notExists($select);
     return $this;
   }
-
+  
   /**
    * Implements QueryConditionInterface::conditions().
    */
@@ -1539,7 +1545,7 @@ class MergeQuery extends Query implements QueryConditionInterface {
     $this->condition->notExists($select);
     return $this;
   }
-
+  
   /**
    * Implements QueryConditionInterface::conditions().
    */
@@ -1756,14 +1762,14 @@ class DatabaseCondition implements QueryConditionInterface, Countable {
   public function exists(SelectQueryInterface $select) {
     return $this->condition('', $select, 'EXISTS');
   }
-
+  
   /**
    * Implements QueryConditionInterface::notExists().
    */
   public function notExists(SelectQueryInterface $select) {
     return $this->condition('', $select, 'NOT EXISTS');
   }
-
+  
   /**
    * Implements QueryConditionInterface::conditions().
    */
@@ -1892,8 +1898,13 @@ class DatabaseCondition implements QueryConditionInterface, Countable {
   function __clone() {
     $this->changed = TRUE;
     foreach ($this->conditions as $key => $condition) {
-      if ($condition['field'] instanceOf QueryConditionInterface) {
-        $this->conditions[$key]['field'] = clone($condition['field']);
+      if ($key !== '#conjunction') {
+        if ($condition['field'] instanceOf QueryConditionInterface) {
+          $this->conditions[$key]['field'] = clone($condition['field']);
+        }
+        if ($condition['value'] instanceOf SelectQueryInterface) {
+          $this->conditions[$key]['value'] = clone($condition['value']);
+        }
       }
     }
   }
@@ -1949,5 +1960,5 @@ class DatabaseCondition implements QueryConditionInterface, Countable {
 }
 
 /**
- * @} End of "ingroup database".
+ * @} End of "addtogroup database".
  */
