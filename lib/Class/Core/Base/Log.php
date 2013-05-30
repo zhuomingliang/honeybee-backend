@@ -8,14 +8,14 @@ class Log {
                 return;
             }
 
-            if(defined('DEBUG')) {
+            if(defined('DEBUG') && constant('DEBUG')) {
                 echo 'Exception Code: ',$e->getCode(), '<br />';
                 echo 'Exception Message: ', $e->getMessage(), '<br />';
                 echo 'At File ', $e->getFile(), ', Line ', $e->getLine(), '<br />';
                 echo 'Trace:<br /><pre>', $e->getTraceAsString(), '</pre><br />';
             }
         } else {
-            if(defined('DEBUG')) {
+            if(defined('DEBUG') && constant('DEBUG')) {
                 echo $e, '<br />';
             }
         }
