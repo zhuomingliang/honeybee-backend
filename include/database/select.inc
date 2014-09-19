@@ -859,6 +859,11 @@ class SelectQueryExtender implements SelectQueryInterface {
 class SelectQuery extends Query implements SelectQueryInterface {
 
   /**
+   * have straight_join? MySQL only.
+   */
+  protected $straight_join = false;
+
+  /**
    * The fields to SELECT.
    *
    * @var array
@@ -999,6 +1004,13 @@ class SelectQuery extends Query implements SelectQueryInterface {
 
   public function getMetaData($key) {
     return isset($this->alterMetaData[$key]) ? $this->alterMetaData[$key] : NULL;
+  }
+
+
+  public function addStraightJoin() {
+    $this->straight_join = true;
+
+    return $this;
   }
 
   /* Implementations of QueryConditionInterface for the WHERE clause. */
@@ -1494,6 +1506,12 @@ class SelectQuery extends Query implements SelectQueryInterface {
 
     // SELECT
     $query = $comments . 'SELECT ';
+
+    if ($this->straight_join) {
+        $query .= 'STRAIGHT_JOIN ';
+    }
+
+
     if ($this->distinct) {
       $query .= 'DISTINCT ';
     }
