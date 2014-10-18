@@ -4,7 +4,7 @@ abstract Class Controller {
     protected $_routes = array();
 
     public function __construct() {
-        $this->PATH_INFO = isset($_GET['_PATH_INFO']) ? trim($_GET['_PATH_INFO']) : '';
+        $this->PATH_INFO = isset($_GET['_PATH_INFO']) ? strtolower(trim($_GET['_PATH_INFO'])) : '';
         unset($_GET['_PATH_INFO']);
     }
 
