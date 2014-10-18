@@ -1,5 +1,5 @@
 <?php
-Class AppController extends Controller {
+Class AppController  {
     private static $_class;
 
     public function __construct() {
