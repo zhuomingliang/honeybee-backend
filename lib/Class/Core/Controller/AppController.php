@@ -3,6 +3,7 @@ Class AppController extends Controller {
     protected static $_class;
 
     public function __construct() {
+        parent::__construct();
         self::$_class = isset($_GET['_CLASS_NAME']) ? $_GET['_CLASS_NAME'] : 'index';
 
         unset($_GET['_CLASS_NAME']);

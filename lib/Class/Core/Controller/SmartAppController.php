@@ -22,5 +22,16 @@ Class SmartAppController extends AppController {
         $class = new $class_name();
         $class->route();
     }
+
+    public function route($class = 'Index') {
+        $action = ucfirst(strstr($this->PATH_INFO, '/', true));
+        $class_file = APP_DIR . 'App/Action/' . $class . '/' . $action . '.php';
+
+        if(is_file($class_file)) {
+            parent::routeClass($action . 'Action', $class_file);
+            return;
+        }
+        parent::route($class);
+    }
 }
 ?>
