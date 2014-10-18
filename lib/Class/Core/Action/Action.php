@@ -13,11 +13,11 @@ abstract class Action {
         $this->post = new Registry();
 
         foreach ($_GET as $key => $value) {
-            $this->get->$key = trim($value);
+            $this->get->$key = is_array($value) ? $value : trim($value);
         }
 
         foreach ($_POST as $key =>$value) {
-            $this->post->$key = is_array($value) ? $value : check_plain($value);
+            $this->post->$key = is_array($value) ? $value : trim($value);
         }
 
         foreach ($_COOKIE as $key => $value) {

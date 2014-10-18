@@ -4,8 +4,7 @@ abstract Class Controller {
     protected $_routes = array();
 
     public function __construct() {
-        $this->_PATH_INFO = isset($_GET['_PATH_INFO']) ? $_GET['_PATH_INFO'] : '';
-
+        $this->_PATH_INFO = isset($_GET['_PATH_INFO']) ? trim($_GET['_PATH_INFO']) : '';
         unset($_GET['_PATH_INFO']);
     }
 
@@ -14,7 +13,6 @@ abstract Class Controller {
             header('HTTP/1.1 404 Not Found');
             throw new Exception('Couldn\'t find \'' . $class_file . '\' , are you visiting wrong file?');
         }
-
         include $class_file;
         if (!class_exists($class, false)){
             throw new Exception('Couldn\'t find \'' . $class . '\' class, are you writting wrong class name?');
@@ -38,7 +36,6 @@ abstract Class Controller {
         }
 
         $class_file = APP_DIR . 'App/Action/' . $class . '.php';
-
         $this->_route($class . 'Action', $class_file);
     }
 }
