@@ -15,7 +15,7 @@ Class SmartAppController extends AppController {
 
         include $class_file;
         $class_name = self::$_class . 'Controller';
-        if (!class_exists($class_name, false)){
+        if (!class_exists($class_name, false)) {
             throw new Exception('Couldn\'t find \'' . $class_name . '\' class, are you writting wrong class name?');
         }
 
@@ -25,6 +25,11 @@ Class SmartAppController extends AppController {
 
     public function route($class = 'Index') {
         $action = ucfirst(strstr($this->PATH_INFO, '/', true));
+
+        if (empty($action)) {
+            $action = ucfirst($this->PATH_INFO);
+        }
+
         $class_file = APP_DIR . 'App/Action/' . $class . '/' . $action . '.php';
 
         if(is_file($class_file)) {
